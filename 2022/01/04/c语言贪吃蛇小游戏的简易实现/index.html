@@ -20,25 +20,30 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"echowz.top","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="基于hexo的个人博客代码分享网站">
-<meta property="og:type" content="website">
-<meta property="og:title" content="王振的个人博客">
-<meta property="og:url" content="http://echowz.top/index.html">
+<meta name="description" content="命令行界面通过打印字符实现了贪吃蛇游戏的基本功能     代码仅130行 实现原理为，采用链式单调数列在矩阵地图中储存为蛇的坐标信息。 &#x2F;&#x2F;贪吃蛇的实现原理在于，将蛇在矩阵中的点表示为正数，并且由蛇尾到蛇头是有向的，从1逐个递增的数列。&#x2F;&#x2F;每次移动时，将蛇头下一格的数据填入当前蛇头的数据+1，再使得地图矩阵的所有正数-1，即可实现整体蛇的移动。 如（01234500 -》 01234560 -》0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c语言贪吃蛇小游戏的简易实现">
+<meta property="og:url" content="http://echowz.top/2022/01/04/c%E8%AF%AD%E8%A8%80%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E7%9A%84%E7%AE%80%E6%98%93%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="王振的个人博客">
-<meta property="og:description" content="基于hexo的个人博客代码分享网站">
+<meta property="og:description" content="命令行界面通过打印字符实现了贪吃蛇游戏的基本功能     代码仅130行 实现原理为，采用链式单调数列在矩阵地图中储存为蛇的坐标信息。 &#x2F;&#x2F;贪吃蛇的实现原理在于，将蛇在矩阵中的点表示为正数，并且由蛇尾到蛇头是有向的，从1逐个递增的数列。&#x2F;&#x2F;每次移动时，将蛇头下一格的数据填入当前蛇头的数据+1，再使得地图矩阵的所有正数-1，即可实现整体蛇的移动。 如（01234500 -》 01234560 -》0">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://echowz.top/2022/01/04/c%E8%AF%AD%E8%A8%80%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E7%9A%84%E7%AE%80%E6%98%93%E5%AE%9E%E7%8E%B0/%5Cimages%5Cpasted-1.png">
+<meta property="og:image" content="http://echowz.top/2022/01/04/c%E8%AF%AD%E8%A8%80%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E7%9A%84%E7%AE%80%E6%98%93%E5%AE%9E%E7%8E%B0/%5Cimages%5Cpasted-2.png">
+<meta property="article:published_time" content="2022-01-04T04:24:40.000Z">
+<meta property="article:modified_time" content="2022-01-04T04:33:57.361Z">
 <meta property="article:author" content="王振">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://echowz.top/2022/01/04/c%E8%AF%AD%E8%A8%80%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E7%9A%84%E7%AE%80%E6%98%93%E5%AE%9E%E7%8E%B0/%5Cimages%5Cpasted-1.png">
 
 
-<link rel="canonical" href="http://echowz.top/">
+<link rel="canonical" href="http://echowz.top/2022/01/04/c%E8%AF%AD%E8%A8%80%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E7%9A%84%E7%AE%80%E6%98%93%E5%AE%9E%E7%8E%B0/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://echowz.top/2022/01/04/c%E8%AF%AD%E8%A8%80%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E7%9A%84%E7%AE%80%E6%98%93%E5%AE%9E%E7%8E%B0/","path":"2022/01/04/c语言贪吃蛇小游戏的简易实现/","title":"c语言贪吃蛇小游戏的简易实现"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>王振的个人博客</title>
+<title>c语言贪吃蛇小游戏的简易实现 | 王振的个人博客</title>
   
 
 
@@ -64,7 +69,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">王振的个人博客</h1>
+      <p class="site-title">王振的个人博客</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">学习历程记录</p>
@@ -147,16 +152,17 @@
 </noscript>
 
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://echowz.top/2022/01/04/c%E8%AF%AD%E8%A8%80%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E7%9A%84%E7%AE%80%E6%98%93%E5%AE%9E%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -169,9 +175,9 @@
       <meta itemprop="name" content="王振的个人博客">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/01/04/c%E8%AF%AD%E8%A8%80%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E7%9A%84%E7%AE%80%E6%98%93%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">c语言贪吃蛇小游戏的简易实现</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          c语言贪吃蛇小游戏的简易实现
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -195,7 +201,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>命令行界面通过打印字符实现了贪吃蛇游戏的基本功能    </p>
+        <p>命令行界面通过打印字符实现了贪吃蛇游戏的基本功能    </p>
 <p>代码仅130行</p>
 <p>实现原理为，采用链式单调数列在矩阵地图中储存为蛇的坐标信息。</p>
 <p>//贪吃蛇的实现原理在于，将蛇在矩阵中的点表示为正数，并且由蛇尾到蛇头是有向的，从1逐个递增的数列。<br>//每次移动时，将蛇头下一格的数据填入当前蛇头的数据+1，再使得地图矩阵的所有正数-1，即可实现整体蛇的移动。 如（01234500 -》 01234560 -》00123450）<br>//若吃到食物，则不执行整体-1，即可实现长度+1；<br>//移动例子&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;如  0 1 2 3 4 5 0 0     -》<br>//&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&ensp;0 1 2 3 4 5 6 0     -》  （若吃到食物，执行到这一步结束就是蛇的边长。）<br>// &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;0 0 1 2 3 4 5 0   </p>
@@ -203,7 +209,6 @@
 
 <p>运行截图：<br><img src="%5Cimages%5Cpasted-1.png" alt="upload successful"><br><img src="%5Cimages%5Cpasted-2.png" alt="upload successful"></p>
 
-      
     </div>
 
     
@@ -211,228 +216,22 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/01/01/%E5%85%B3%E4%BA%8E%E5%BB%BA%E5%9B%BE%E5%92%8C%E9%81%8D%E5%8E%86%E7%9A%84%E7%AE%80%E6%B4%81%E6%96%B9%E6%B3%95%E2%80%94%E5%9F%BA%E4%BA%8EC-%E8%AF%AD%E8%A8%80/" rel="prev" title="关于建图和遍历的简洁方法—基于C++语言">
+                  <i class="fa fa-chevron-left"></i> 关于建图和遍历的简洁方法—基于C++语言
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://echowz.top/2022/01/01/%E5%85%B3%E4%BA%8E%E5%BB%BA%E5%9B%BE%E5%92%8C%E9%81%8D%E5%8E%86%E7%9A%84%E7%AE%80%E6%B4%81%E6%96%B9%E6%B3%95%E2%80%94%E5%9F%BA%E4%BA%8EC-%E8%AF%AD%E8%A8%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="王振">
-      <meta itemprop="description" content="基于hexo的个人博客代码分享网站">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="王振的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/01/01/%E5%85%B3%E4%BA%8E%E5%BB%BA%E5%9B%BE%E5%92%8C%E9%81%8D%E5%8E%86%E7%9A%84%E7%AE%80%E6%B4%81%E6%96%B9%E6%B3%95%E2%80%94%E5%9F%BA%E4%BA%8EC-%E8%AF%AD%E8%A8%80/" class="post-title-link" itemprop="url">关于建图和遍历的简洁方法—基于C++语言</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-01-01 16:33:00 / 修改时间：16:42:59" itemprop="dateCreated datePublished" datetime="2022-01-01T16:33:00+08:00">2022-01-01</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>得益于C++强大的<strong>STL</strong>容器，我们可以将建图的过程以及遍历的过程进行极大的压缩，在保证了代码的可读性同时，不失时间复杂度和空间复杂度，STL搭配<strong>增强for循环</strong>可以使子节点的遍历剪去许多无用分支。<br>该代码建图方法的核心思想与邻接表类似，但不同的是并没有采用链式结构，而是哈希散列表加map映射搭配线性vector做到的逻辑简明的结构。<br>以下代码实现了DFS+BFS的搜索，我们应当注意到，在抛弃掉指针这一概念后，其码量和逻辑都得到了极大的改善。<br>[点赞]</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bitset&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">unordered_map&lt;<span class="keyword">int</span>, vector&lt;<span class="keyword">int</span>&gt;&gt; mp;									<span class="comment">//非链式，散列map的高效建图法</span></span><br><span class="line">bitset&lt;524288&gt; st;															<span class="comment">//标记</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cout &lt;&lt; u &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">	st.<span class="built_in">set</span>(u);																<span class="comment">//标记</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> i : mp[u])													<span class="comment">//增强for</span></span><br><span class="line">		<span class="keyword">if</span> (!st[i]) <span class="built_in">DFS</span>(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	st.<span class="built_in">reset</span>();															<span class="comment">//重置标记</span></span><br><span class="line">	queue&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">	q.<span class="built_in">push</span>(u);</span><br><span class="line">	st.<span class="built_in">set</span>(u);</span><br><span class="line">	<span class="keyword">while</span> (!q.<span class="built_in">empty</span>())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">char</span> temp = q.<span class="built_in">front</span>(); </span><br><span class="line">		q.<span class="built_in">pop</span>();</span><br><span class="line">		cout &lt;&lt; temp &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">auto</span> i : mp[temp])</span><br><span class="line">			<span class="keyword">if</span> (!st[i] &amp;&amp; (st.<span class="built_in">set</span>(i),<span class="number">1</span>))	q.<span class="built_in">push</span>(i);				<span class="comment">//未标记点标记并入列</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n, m, start;										<span class="comment">//puts(&quot;输入图的结点个数和边数： &quot;);</span></span><br><span class="line">	cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">	&#123;												<span class="comment">//puts(&quot;输入两个结点 添加一条由左到右的有向边：&quot;);</span></span><br><span class="line">		<span class="keyword">int</span> a, b;</span><br><span class="line">		cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">		mp[a].<span class="built_in">push_back</span>(b);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">																	<span class="comment">//puts(&quot;输入遍历起点： &quot;);</span></span><br><span class="line">	cin &gt;&gt; start;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">DFS</span>(start);</span><br><span class="line">		</span><br><span class="line">	<span class="built_in">putchar</span>(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">	<span class="built_in">BFS</span>(start);</span><br><span class="line">    </span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://echowz.top/2022/01/01/Hexo-admin-%E7%AE%A1%E7%90%86%E6%96%87%E7%AB%A0-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="王振">
-      <meta itemprop="description" content="基于hexo的个人博客代码分享网站">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="王振的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/01/01/Hexo-admin-%E7%AE%A1%E7%90%86%E6%96%87%E7%AB%A0-1/" class="post-title-link" itemprop="url">Hexo admin 管理文章</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2022-01-01 15:57:14 / 修改时间：16:43:57" itemprop="dateCreated datePublished" datetime="2022-01-01T15:57:14+08:00">2022-01-01</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>hexo的默认文章编辑和管理方法十分的不方便，通过相应插件可以做到可视化管理。</p>
-<p>首先在相对目录下安装插件</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install <span class="comment">--save hexo-admin</span></span><br></pre></td></tr></table></figure>
-<p>启动服务器进行本地编辑    </p>
-<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo <span class="keyword">server</span> -d</span><br></pre></td></tr></table></figure>
-<p>即可进入<br>localhost:4000/admin/   进行可视化的文章管理和编辑<br>在deploy之前需要配置文件<br>在_config.yml文件的末尾添加      </p>
-<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">admin</span>:</span><br><span class="line"> deployCommand: <span class="string">&#x27;hexo-pubish.bat&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>在同级目录下创建文件hexo-pubish.bat<br>文件内容为    </p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo g -d</span></span><br></pre></td></tr></table></figure>
-<p>之后即可deploy部署</p>
-<p>编辑时可直接粘贴图片，会将文件下载至source/images。然后修改引用路径即可正常显示</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://echowz.top/2022/01/01/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="王振">
-      <meta itemprop="description" content="基于hexo的个人博客代码分享网站">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="王振的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/01/01/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-01-01 14:32:40" itemprop="dateCreated datePublished" datetime="2022-01-01T14:32:40+08:00">2022-01-01</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
 
 
 
