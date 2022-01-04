@@ -118,7 +118,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -150,6 +150,83 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://echowz.top/2022/01/04/hexo%E4%B8%8BNexT%E7%9A%84%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="王振">
+      <meta itemprop="description" content="基于hexo的个人博客代码分享网站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王振的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/01/04/hexo%E4%B8%8BNexT%E7%9A%84%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">hexo下NexT的主题背景及框体透明度修改 </a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-01-04 21:01:30 / 修改时间：21:37:29" itemprop="dateCreated datePublished" datetime="2022-01-04T21:01:30+08:00">2022-01-04</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>首先定位主题文件夹next目录下的主题配置文件<br><code>.\themes\next\\_config.yml</code><br>打开并查找 &nbsp;&nbsp;&nbsp;&nbsp;<br><code>style: source/_data/styles.styl </code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;并将改行的注释解除。<br>在改行所描述的目录下创建相应的文件，即 source/_data/styles.styl 并打开  </p>
+<h5>1.主题背景更改</h5>
+在styles.styl 中插入以下代码
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>:url(/images/background.jpg);		<span class="comment">//图片路径，默认</span></span><br><span class="line">    <span class="attribute">background-repeat</span>: no-repeat;			<span class="comment">//图片无法铺满时，是否重复及重复方式</span></span><br><span class="line">    <span class="attribute">background-attachment</span>:fixed;		<span class="comment">//图片是否跟随滚动</span></span><br><span class="line">    <span class="attribute">background-size</span>:cover;				<span class="comment">//覆盖</span></span><br><span class="line">    <span class="attribute">background-position</span>:center;		<span class="comment">//图片显示起始位置</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>并前面主题目录下，<code>.\themes\next\source\images</code> 添加图片文件<code>background.jpg</code>作为背景图片</p>
+<h5>2.文章背景框透明化</h5>
+因为设置整个主题的透明度会导致字体也跟随变化，十分影响观感，因此经过博主的反复尝试加查找，精准定位到该背景框的样式，修改其颜色即可。 打开根目录下`source/_data/styles.styl` 并插入以下代码：  
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//文章背板的颜色rgb</span></span><br><span class="line"><span class="selector-class">.main-inner</span> &gt; <span class="selector-class">.sub-menu</span>, <span class="selector-class">.main-inner</span> &gt; <span class="selector-class">.post-block</span>, <span class="selector-class">.main-inner</span> &gt; <span class="selector-class">.tabs-comment</span>, <span class="selector-class">.main-inner</span> &gt; <span class="selector-class">.comments</span>, <span class="selector-class">.main-inner</span> &gt; .pagination&#123;</span><br><span class="line">	<span class="attribute">background</span>: <span class="number">#f5f5f5</span>6b;		<span class="comment">//此处使用十六进制颜色代码，			也可以使用rgba进行调色，</span></span><br><span class="line">    						<span class="comment">//实际效果为白色透明色底板				rgba的第四参数即为透明度</span></span><br><span class="line">&#125;</span><br><span class="line">body&#123;				<span class="comment">//修改主体字体颜色</span></span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#000</span>;		<span class="comment">//纯黑</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.posts-expand</span> <span class="selector-class">.post-title-link</span> &#123;	<span class="comment">//标题颜色</span></span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#000</span>;				<span class="comment">//首页文章标题颜色， （默认为灰辨识度不高）</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.posts-expand</span> <span class="selector-class">.post-meta-container</span> &#123;	<span class="comment">//标题下的日期颜色</span></span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#880000</span>;				<span class="comment">//此处修改为红色，可自行调用rgb调色</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//侧边框的透明度设置</span></span><br><span class="line"><span class="selector-class">.sidebar</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0.85</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>额外透明可选添加代码：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.header-<span class="class">inner </span>&#123;		<span class="comment">//菜单栏的调色</span></span><br><span class="line"><span class="symbol">  background:</span> rgba(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,<span class="number">0.8</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.<span class="class">popup </span>&#123;		<span class="comment">//搜索框透明</span></span><br><span class="line"><span class="symbol">  opacity:</span> <span class="number">0.8</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.main-<span class="class">inner </span>&#123; 	<span class="comment">//整个主体的透明度</span></span><br><span class="line"><span class="symbol">   opacity:</span> <span class="number">0.8</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>根据实际需要更改的透明模块还可以打开网页审查元素，定位到详细的模块查找模块的样式并在styles.styl文件中插入其定义规则。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
